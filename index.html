@@ -1,47 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>charity: water - Make a Difference</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f2f7f6;
+      color: #2c2c2c;
+      line-height: 1.6;
+    }
+
+    /* The hero section uses a background image and a light overlay */
+.hero {
+  /* Set the background image for the banner */
+  background-image: url('img/charity water girl.jpg');
+  background-size: cover;      /* Make the image cover the whole section */
+  background-position: center; /* Center the image */
+  position: relative;          /* Needed for overlay */
+  text-align: center;
+  padding: 100px 20px 60px;
+  color: #000;
+}
+
+/* Add a light overlay to keep the image subtle and text readable */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.7); /* White with some transparency */
+  z-index: 1;
+}
+
+/* Make sure the text is above the overlay */
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5em;
+      color: #fdd835;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto 1.5em;
+    }
+
+    .cta-button {
+      background-color: #005f73;
+      color: #fff;
+      padding: 14px 28px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .cta-button:hover {
+      background-color: #0a9396;
+    }
+
+    .cta-button:active {
+      transform: scale(0.97);
+    }
+
+    .droplet {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #0077b6;
+      border-radius: 50%;
+      animation: drop 1s ease-out forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes drop {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      100% { transform: translateY(60px) scale(0.5); opacity: 0; }
+    }
+
+    .story, .cta {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+      animation: fadeInUp 1s ease both;
+    }
+
+    .story h2, .cta h2 {
+      color: #005f73;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .story p, .cta p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+
+    .story img {
+      width: 100%;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    footer {
+      background-color: #001219;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .cta-button {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Responsive styles for the background and logo section */
+@media (max-width: 600px) {
+  .story div[style*="inline-block"] {
+    width: 95% !important;   /* Make the background fit small screens */
+    height: 120px !important; /* Shorter on mobile */
+  }
+  .story img[alt="Water Can"] {
+    width: 120px !important;
+    height: 70px !important;
+  }
+}
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Add a fun hover effect to the water can logo */
+.story img[alt="Water Can"] {
+  transition: transform 0.3s;
+}
+.story img[alt="Water Can"]:hover {
+  transform: scale(1.1) rotate(-5deg);
+}
+  </style>
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
+  <header class="hero">
+    <!-- Add the logo image above the headline -->
+    <img src="img/cw_logo.png" alt="Charity Water Logo" style="width: 120px; margin-bottom: 20px;">
+    <h1>Join the Movement. Change Lives.</h1>
+    <p>Clean water changes everything — health, education, and opportunity. Be a part of the solution today.</p>
+    <a href="#cta" class="cta-button" onclick="createDroplets(event)">Get Involved</a>
+  </header>
+  <section class="story">
+    <h2>Why Water?</h2>
+    <p>771 million people around the world live without clean water. charity: water is on a mission to end the water crisis — and college students like you are stepping up to help. Learn how your voice and actions can make a real impact.</p>
+<!-- Show the water can image at the bottom of the story section with a wider and taller background image behind it -->
+<div
+  style="
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+    /* Make the background much wider and a bit taller */
+    width: 500px;   /* Wide background */
+    height: 200px;  /* Taller background */
+  "
+>
+  <!-- Background image with transparency -->
+  <div
+    style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('img/charity water people.webp') center/cover no-repeat;
+      opacity: 0.4; /* Makes the background image see-through */
+      border-radius: 10px;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    "
+  ></div>
+  <!-- Water can logo on top, centered -->
+  <img
+    src="img/water-can-transparent.png"
+    alt="Water Can"
+    style="
+      width: 220px;   /* Logo size */
+      height: 120px;  /* Logo height */
+      border-radius: 10px;
+      position: relative;
+      z-index: 2;
+      display: block;
+      margin: 40px auto 0 auto; /* Center the logo and add space at the top */
+    "
+  />
+</div>
+  <section class="cta" id="cta">
+    <h2>Start Your Fundraiser Today</h2>
+    <p>It only takes a few minutes to set up a campaign and start raising money for clean water projects. Use your birthday, a fitness challenge, or any event to make a difference.</p>
+    <a href="https://www.charitywater.org/fundraisers" target="_blank" class="cta-button" onclick="createDroplets(event)">Start Fundraising</a>
+  </section>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+  <footer>
+    <p>&copy; 2025 charity: water. All rights reserved.</p>
+  </footer>
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
-        </div>
-    </section>
-
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+<script>
+  // This function creates water droplets that animate across the whole page
+  function createDroplets(e) {
+    for (let i = 0; i < 6; i++) {
+      const drop = document.createElement('span');
+      drop.className = 'droplet';
+      // Set a random horizontal position across the whole page
+      drop.style.left = Math.random() * 100 + 'vw';
+      drop.style.top = '0';
+      drop.style.position = 'fixed'; // Make droplets appear relative to the viewport
+      drop.style.pointerEvents = 'none'; // So they don't block clicks
+      document.body.appendChild(drop);
+      setTimeout(() => drop.remove(), 1000);
+    }
+  }
+</script>
 </body>
 </html>
